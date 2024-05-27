@@ -1,0 +1,59 @@
+:root{
+    --azul_escuro: #1b1a24;
+    --primary_text_color: #C0BFC4;
+    --primary_text_color_hover: #929196;
+}
+
+@font-face {
+    font-family: "Popins_Regular";
+    src: url(../assets/fonts/Poppins-Regular.ttf);
+}
+
+.navbar{
+    background: linear-gradient(to right, #16151b, #1d1c27, #222231)
+}
+
+.link_color{
+    color: var(--primary_text_color);
+    font-family: "Popins_Regular";
+}
+
+.link_color:hover,
+.link_color:focus,
+.link_color:active{
+    color: var(--primary_text_color_hover);
+}
+
+.text_color{
+    color: var(--primary_text_color);
+    font-family: "Popins_Regular";
+}
+
+.introducao_home{
+    margin-top: 10%;
+    /* margin-right: 5%; */
+}
+
+.cor_fundo_primeira_secao{
+    background: linear-gradient(to right, #16151b, #1d1c27, #222231)
+}
+
+.cor_fundo_segunda_secao{
+    background: linear-gradient(to right, #1a1a1b, #212021, #232324);
+}
+
+.cor_fundo_terceira_secao{
+    background: linear-gradient(to right, #15141b, #1c1c27, #222231);
+}
+
+.redes{
+    margin-top: 50%;
+}
+
+.somos_nos{
+    padding-top: 200px;
+}
+
+.aula{
+    min-height: 200px;
+}
