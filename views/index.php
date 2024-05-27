@@ -42,7 +42,7 @@ include_once "../menu.php"
                         exercitation ullamco laboris nisi ut aliquip ex ea
                         commodo consequat. </p>
                 </div>
-                <div class="col-md-8 text-end">
+                <div class="col-md-8 text-center">
                     <img class="w-75" src="../assets/images/Yellow Dancer.png" alt="Imagem de uma bailarina">
                 </div>
             </div>
@@ -63,7 +63,7 @@ include_once "../menu.php"
                     <div class="col-md-6 mt-5">
                         <div class="d-flex py-3 aula border border-danger rounded-4">
                             <div class="text-center">
-                                <img class="w-50" src="../assets/images/img<?= $i; ?>.png" alt="">
+                                <img class="w-75" src="../assets/images/img<?= $i; ?>.png" alt="">
                             </div>
                             <div class="d-flex text-center justify-content-around flex-column w-75">
                                 <h2 class="text_color"><?= $aulas->danca ?></h2>
