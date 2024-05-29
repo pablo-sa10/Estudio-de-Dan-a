@@ -8,4 +8,9 @@ class DancaController{
         $aulas = (new DancaModel())->aulas();
         return $aulas;
     }
+
+    public function getAlunosRegistrados(){
+        $alunosRegistrados = (new DancaModel())->alunosResgistrados();
+        return $alunosRegistrados;
+    }
 }

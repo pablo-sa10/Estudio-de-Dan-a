@@ -38,25 +38,18 @@ class DancaModel
         }
     }
 
-    public function alunosResgistrados($id_aluno)
+    public function alunosResgistrados()
     {
         $db = new Conexao();
         $db = $db->conectar();
 
         try {
-            $sql = "SELECT 
-            nome
+            $sql = "SELECT nome
             ,idade
-            ,(SELECT count(*) FROM participacoes p
-            INNER JOIN alunos alu ON alu.id = p.aluno_id
-            INNER JOIN aulas a ON a.id = p.aula_id
-            WHERE alu.id = :id) AS 'total cursos'
-        FROM alunos alu
-        INNER JOIN participacoes p On p.aluno_id = alu.id
-        INNER JOIN aulas a ON a.id = p.aula_id";
+            ,(SELECT COUNT(*) FROM participacoes WHERE aluno_id = a.id)  AS 'total'
+            FROM alunos a";
 
         $busca = $db->prepare($sql);
-        $busca->bindValue(":id", $id_aluno, PDO::PARAM_INT);
         $busca->execute();
 
         $resultado = $busca->fetchAll(PDO::FETCH_OBJ);
