@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 
 include_once "../menu.php";
@@ -8,10 +8,9 @@ include_once "../menu.php";
 <main>
 
     <section class="cor_fundo_primeira_secao py-5">
-        <form method="post" class="container">
+        <div class="container">
             
-        </form> 
+        </div>
     </section>
 
 </main>
-
