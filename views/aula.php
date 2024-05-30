@@ -23,7 +23,7 @@ $registrosAula = $dancaController->getRegistroAula($id_aula);
             <div class="text-start flex-column">
                 <h3 class="text_color my-2">Professor: <?= $aula->professor ?></h3>
                 <h3 class="text_color my-3">Especialista em: <?= $aula->especialidade ?></h3>
-                <div class="mt-4 d-flex justify-content-center">
+                <div class="mt-4 d-flex justify-content-md-center">
                     <?php for($i = 1; $i < 6; $i++ ){ ?>
                     <h4><i class="estrela bi bi-star-fill"></i></h4>
                     <?php } ?>
