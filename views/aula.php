@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 include "../controller/dancaController.php";
 include_once "../menu.php";
@@ -6,23 +6,34 @@ include_once "../menu.php";
 $id_aula = $_POST['id'];
 
 $dancaController = new DancaController();
-$professor = $dancaController->professor($id_aula);
+$aula = $dancaController->getAula($id_aula);
+
+$registrosAula = $dancaController->getRegistroAula($id_aula);
 
 ?>
 
 <main class="">
 
     <section class="cor_fundo_primeira_secao py-5">
-        <div class="d-flex">
-            <div>
-
+        <h1 class="text_color text-center">AULA DE <?= mb_strtoupper($aula->danca) ?> </h1>
+        <div class="container d-flex text-center justify-content-center my-5">
+            <div class="mx-5">
+                <img src="../assets/images/Ellipse<?= $id_aula ?>.png" alt="">
+            </div>
+            <div class="text-start flex-column">
+                <h3 class="text_color my-2">Professor: <?= $aula->professor ?></h3>
+                <h3 class="text_color my-3">Especialista em: <?= $aula->especialidade ?></h3>
+                <div class="mt-4 d-flex justify-content-center">
+                    <?php for($i = 1; $i < 6; $i++ ){ ?>
+                    <h4><i class="estrela bi bi-star-fill"></i></h4>
+                    <?php } ?>
+                </div>
             </div>
         </div>
     </section>
 
     <section class="cor_fundo_quarta_secao py-5">
         <div class="container">
-            <h1 class="text_color text-center">ALUNOS MATRICULADO EM </h1>
             <table class="table table-dark table-striped my-5 text-center">
                 <thead>
                     <tr class="">
@@ -34,15 +45,15 @@ $professor = $dancaController->professor($id_aula);
                     </tr>
                 </thead>
                 <tbody class="">
-                    <?php foreach ($alunos as $alunos => $item) {?>
-                    <tr>
-                        <td class="w-25"><?= $item->nome ?></td>
-                        <td class="w-25"><?= $item->idade ?></td>
-                        <td class="w-25"><?= $item->total ?></td>
-                        <td><button class="btn btn-primary">Editar</button></td>
-                        <td><button class="btn btn-danger">Excluir</button></td>
-                    </tr>
-                    <?php }?>
+                    <?php foreach ($alunos as $alunos => $item) { ?>
+                        <tr>
+                            <td class="w-25"><?= $item->nome ?></td>
+                            <td class="w-25"><?= $item->idade ?></td>
+                            <td class="w-25"><?= $item->total ?></td>
+                            <td><button class="btn btn-primary">Editar</button></td>
+                            <td><button class="btn btn-danger">Excluir</button></td>
+                        </tr>
+                    <?php } ?>
                 </tbody>
             </table>
 

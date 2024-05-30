@@ -19,8 +19,13 @@ class DancaController{
         return $registrarAlunos;
     }
 
-    public function professor($id_aula){
-        $professor = (new DancaModel())->professor($id_aula);
-        return $professor;
+    public function getAula($id_aula){
+        $aula = (new DancaModel())->getAula($id_aula);
+        return $aula;
+    }
+
+    public function getRegistroAula($id_aula){
+        $registroAula = (new DancaModel())->getRegistroAula($id_aula);
+        return $registroAula;
     }
 }
