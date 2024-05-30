@@ -11,8 +11,7 @@ class DancaModel
         $db = $db->conectar();
 
         try {
-            $sql = "SELECT a.id, p.nome as profsesor, a.danca, a.horario, p.especialidade FROM dance.aulas a
-            INNER JOIN dance.professores p ON p.id = a.professor_id";
+            $sql = "SELECT a.id, a.danca, a.horario FROM dance.aulas a";
 
             $busca = $db->prepare($sql);
             $busca->execute();
@@ -49,12 +48,11 @@ class DancaModel
             ,(SELECT COUNT(*) FROM participacoes WHERE aluno_id = a.id)  AS 'total'
             FROM alunos a";
 
-        $busca = $db->prepare($sql);
-        $busca->execute();
+            $busca = $db->prepare($sql);
+            $busca->execute();
 
-        $resultado = $busca->fetchAll(PDO::FETCH_OBJ);
-        $busca->closeCursor();
-
+            $resultado = $busca->fetchAll(PDO::FETCH_OBJ);
+            $busca->closeCursor();
         } catch (PDOException $e) {
             echo "<a  href='./index.php'> 
                         <div class='text-center alert alert-danger ' role='alert'>
@@ -70,23 +68,30 @@ class DancaModel
         return $resultado;
     }
 
-    public function registrarAluno($nome, $idade){
+    public function registrarAluno($nome, $idade)
+    {
         $db = new Conexao();
         $db = $db->conectar();
 
-        try{
+        try {
+            $db->beginTransaction();
+
             $sql = "INSERT INTO alunos (nome, idade)
             VALUES (:nome, :idade)";
 
             $busca = $db->prepare($sql);
             $busca->bindValue(":nome", $nome, PDO::PARAM_STR);
-            $busca->bindValue(":idade", $nome, PDO::PARAM_INT);
+            $busca->bindValue(":idade", $idade, PDO::PARAM_INT);
 
-            
+            $busca->execute();
 
-            
+            $db->lastInsertId();
+            $db->commit();
+            $busca->closeCursor();
 
-        }catch(PDOException $e){
+            return true;
+        } catch (PDOException $e) {
+            $db->rollBack();
             echo "<a  href='./index.php'> 
                         <div class='text-center alert alert-danger ' role='alert'>
                             <h4 class='alert-heading'> <span class='glyphicon glyphicon-alert'></span>  Atenção:<h4>
@@ -95,7 +100,12 @@ class DancaModel
                             <h6>Notifique Pablo TI</h6>
                         </div>
                     </a>";
+            return false;
             exit(); //NÃO DEIXA CONTINUAR A EXECUÇÃO
         }
+    }
+
+    public function professor($id_aula){
+        
     }
 }

@@ -1,3 +1,9 @@
+<?php
+
+$current_page = basename($_SERVER['PHP_SELF']);
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -26,8 +32,16 @@
                     <li class="nav-item">
                         <a class="nav-link link_color mx-3" href="./alunos_registrados.php">ALUNOS REGISTRADOS</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link link_color mx-3" aria-disabled="true">AULAS</a>
+                    <?php 
+                    $hidden = "d-block";
+
+                    if($current_page != 'index.php'){
+                        $hidden = 'd-none';
+                    }
+                    
+                    ?>
+                    <li class="<?= $hidden ?> nav-item">
+                        <a class="nav-link link_color mx-3" href="#aulas" aria-disabled="true">AULAS</a>
                     </li>
                 </ul>
             </div>

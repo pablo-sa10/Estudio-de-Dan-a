@@ -1,21 +1,28 @@
-<?php
+<?php 
 
-require_once "../model/conexao.php";
-require_once "../controller/dancaController.php";
+include "../controller/dancaController.php";
+include_once "../menu.php";
 
-$alunosController = new DancaController();
+$id_aula = $_POST['id'];
 
-$alunos = $alunosController->getAlunosRegistrados();
-
-require_once "../menu.php";
+$dancaController = new DancaController();
+$professor = $dancaController->professor($id_aula);
 
 ?>
 
 <main class="">
 
     <section class="cor_fundo_primeira_secao py-5">
+        <div class="d-flex">
+            <div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="cor_fundo_quarta_secao py-5">
         <div class="container">
-            <h1 class="text_color text-center">ALUNOS REGISTRADOS NA ESCOLA</h1>
+            <h1 class="text_color text-center">ALUNOS MATRICULADO EM </h1>
             <table class="table table-dark table-striped my-5 text-center">
                 <thead>
                     <tr class="">
@@ -28,10 +35,10 @@ require_once "../menu.php";
                 </thead>
                 <tbody class="">
                     <?php foreach ($alunos as $alunos => $item) {?>
-                    <tr class="">
-                        <td class="pt-3 text_color w-25"><?= $item->nome ?></td>
-                        <td class="pt-3 text_color w-25"><?= $item->idade ?></td>
-                        <td class="pt-3 text_color w-25"><?= $item->total ?></td>
+                    <tr>
+                        <td class="w-25"><?= $item->nome ?></td>
+                        <td class="w-25"><?= $item->idade ?></td>
+                        <td class="w-25"><?= $item->total ?></td>
                         <td><button class="btn btn-primary">Editar</button></td>
                         <td><button class="btn btn-danger">Excluir</button></td>
                     </tr>
