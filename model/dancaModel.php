@@ -69,4 +69,33 @@ class DancaModel
 
         return $resultado;
     }
+
+    public function registrarAluno($nome, $idade){
+        $db = new Conexao();
+        $db = $db->conectar();
+
+        try{
+            $sql = "INSERT INTO alunos (nome, idade)
+            VALUES (:nome, :idade)";
+
+            $busca = $db->prepare($sql);
+            $busca->bindValue(":nome", $nome, PDO::PARAM_STR);
+            $busca->bindValue(":idade", $nome, PDO::PARAM_INT);
+
+            
+
+            
+
+        }catch(PDOException $e){
+            echo "<a  href='./index.php'> 
+                        <div class='text-center alert alert-danger ' role='alert'>
+                            <h4 class='alert-heading'> <span class='glyphicon glyphicon-alert'></span>  Atenção:<h4>
+                            <hr/>
+                            Erro de Consulta!$e
+                            <h6>Notifique Pablo TI</h6>
+                        </div>
+                    </a>";
+            exit(); //NÃO DEIXA CONTINUAR A EXECUÇÃO
+        }
+    }
 }

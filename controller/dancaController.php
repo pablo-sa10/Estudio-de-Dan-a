@@ -13,4 +13,9 @@ class DancaController{
         $alunosRegistrados = (new DancaModel())->alunosResgistrados();
         return $alunosRegistrados;
     }
+
+    public function registrarAluno($nome, $idade){
+        $registrarAlunos = (new DancaModel())->registrarAluno($nome, $idade);
+        return $registrarAlunos;
+    }
 }
