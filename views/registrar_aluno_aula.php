@@ -3,7 +3,7 @@
 require_once "../controller/dancaController.php";
 
 $alunosController = new DancaController();
-$alunos = $alunosController->getAlunosRegistrados();
+$alunos = $alunosController->getAlunosRegistrados("");
 $aula_id = $_GET['aula'];
 
 $jaRegistrado = false;
@@ -78,5 +78,11 @@ include_once "../menu.php";
             </div>
         </div>
     </section>
+
+    <?php
+
+    include_once "../footer.php";
+
+    ?>
 
 </main>

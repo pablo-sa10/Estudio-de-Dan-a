@@ -53,7 +53,7 @@ if (isset($_POST['action'])) {
 
     <section class="cor_fundo_quarta_secao py-5">
         <div class="container">
-            <table class="table table-dark table-striped my-5 text-center">
+            <table class="table  table-dark table-striped my-5 text-center">
                 <thead>
                     <tr class="">
                         <th class="w-25" scope="col">Aluno</th>
@@ -108,5 +108,11 @@ if (isset($_POST['action'])) {
             </div>
         </div>
     </section>
+
+    <?php
+
+    include_once "../footer.php";
+
+    ?>
 
 </main>

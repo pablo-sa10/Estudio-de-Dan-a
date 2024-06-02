@@ -23,8 +23,15 @@ include_once "../menu.php"
                         <p class="text_color fs-5">Enjoy each step along the way.</p>
                         <h2 class="text_color mt-4">Learn to dance with style</h2>
                     </div>
-                    <div class="redes">
-                        <p class="text_color fs-5">Siga-nos </p>
+                    <div class="redes flex-column text-start">
+                        <div>
+                            <p class="text_color mx-2 fs-5">Siga-nos </p>
+                        </div>
+                        <div class="d-flex">
+                            <button class="btn"><i class="text_color fs-3 bi bi-instagram"></i></button>
+                            <button class="btn"><i class="text_color fs-3 bi bi-twitter-x"></i></button>
+                            <button class="btn"><i class="text_color fs-3 bi bi-facebook"></i></button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -80,5 +87,11 @@ include_once "../menu.php"
             </div>
         </div>
     </section>
+
+    <?php
+
+    include_once "../footer.php";
+
+    ?>
 
 </main>

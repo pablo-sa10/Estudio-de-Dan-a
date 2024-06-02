@@ -4,7 +4,7 @@ class Conexao{
     private $servidor = "localhost";
     private $dbname = "dance";
     private $username = "root";
-    private $senha = "santista10";
+    private $senha = "";
     private $conn;
 
     public function conectar(){

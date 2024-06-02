@@ -9,13 +9,13 @@ class DancaController{
         return $aulas;
     }
 
-    public function getAlunosRegistrados(){
-        $alunosRegistrados = (new DancaModel())->alunosResgistrados();
+    public function getAlunosRegistrados($id_aluno){
+        $alunosRegistrados = (new DancaModel())->alunosResgistrados($id_aluno);
         return $alunosRegistrados;
     }
 
-    public function registrarAluno($nome, $idade){
-        $registrarAlunos = (new DancaModel())->registrarAluno($nome, $idade);
+    public function registrarAluno($nome, $idade, $id){
+        $registrarAlunos = (new DancaModel())->registrarAluno($nome, $idade, $id);
         return $registrarAlunos;
     }
 
@@ -50,6 +50,11 @@ class DancaController{
 
     public function deletarAlunoAula($id_aluno, $id_aula){
         $deletarAluno = (new DancaModel())->deletarAlunoAula($id_aluno, $id_aula);
+        return $deletarAluno;
+    }
+
+    public function deletarAluno($id){
+        $deletarAluno = (new DancaModel())->deletarAluno($id);
         return $deletarAluno;
     }
 }

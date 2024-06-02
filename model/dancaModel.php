@@ -37,7 +37,7 @@ class DancaModel
         }
     }
 
-    public function alunosResgistrados()
+    public function alunosResgistrados($id_aluno)
     {
         $db = new Conexao();
         $db = $db->conectar();
@@ -47,9 +47,16 @@ class DancaModel
             ,nome
             ,idade
             ,(SELECT COUNT(*) FROM participacoes WHERE aluno_id = a.id)  AS 'total'
-            FROM alunos a";
+            FROM alunos a ";
+
+            if (!empty($id_aluno)) {
+                $sql .= " WHERE id = :id ";
+            }
 
             $busca = $db->prepare($sql);
+            if (!empty($id_aluno)) {
+                $busca->bindValue(":id", $id_aluno, PDO::PARAM_INT);
+            }
             $busca->execute();
 
             $resultado = $busca->fetchAll(PDO::FETCH_OBJ);
@@ -69,7 +76,7 @@ class DancaModel
         return $resultado;
     }
 
-    public function registrarAluno($nome, $idade)
+    public function registrarAluno($nome, $idade, $id)
     {
         $db = new Conexao();
         $db = $db->conectar();
@@ -77,16 +84,27 @@ class DancaModel
         try {
             $db->beginTransaction();
 
-            $sql = "INSERT INTO alunos (nome, idade)
-            VALUES (:nome, :idade)";
+            if (empty($id)) {
+                $sql = "INSERT INTO alunos (nome, idade)
+                VALUES (:nome, :idade)";
+            }elseif(!empty($id)){
+                $sql = "UPDATE alunos 
+                SET nome = :nome, idade = :idade
+                WHERE id = :id";
+            }
 
             $busca = $db->prepare($sql);
             $busca->bindValue(":nome", $nome, PDO::PARAM_STR);
             $busca->bindValue(":idade", $idade, PDO::PARAM_INT);
+            if (!empty($id)){
+                $busca->bindValue(":id", $id, PDO::PARAM_INT);
+            }
 
             $busca->execute();
 
-            $db->lastInsertId();
+            if (empty($id)){
+                $db->lastInsertId();
+            }
             $db->commit();
             $busca->closeCursor();
 
@@ -227,12 +245,13 @@ class DancaModel
         }
     }
 
-    public function atualizarNivel($nivel, $aluno_id, $id_aula){
+    public function atualizarNivel($nivel, $aluno_id, $id_aula)
+    {
 
         $db = new Conexao();
         $db = $db->conectar();
 
-        try{
+        try {
             $db->beginTransaction();
 
             $sql = "UPDATE participacoes 
@@ -250,7 +269,7 @@ class DancaModel
             $busca->closeCursor();
 
             return true;
-        }catch(PDOException $e){
+        } catch (PDOException $e) {
 
             $db->rollBack();
             echo "<a  href='./index.php'> 
@@ -266,11 +285,12 @@ class DancaModel
         }
     }
 
-    public function deletarAlunoAula($id_aluno, $id_aula){
+    public function deletarAlunoAula($id_aluno, $id_aula)
+    {
         $db = new Conexao();
         $db = $db->conectar();
 
-        try{
+        try {
             $db->beginTransaction();
 
             $sql = "DELETE FROM participacoes 
@@ -285,7 +305,41 @@ class DancaModel
             $busca->closeCursor();
 
             return true;
-        }catch(PDOException $e){
+        } catch (PDOException $e) {
+
+            $db->rollBack();
+            echo "<a  href='./index.php'> 
+                        <div class='text-center alert alert-danger ' role='alert'>
+                            <h4 class='alert-heading'> <span class='glyphicon glyphicon-alert'></span>  Atenção:<h4>
+                            <hr/>
+                            Erro de Consulta!$e
+                            <h6>Notifique Pablo TI</h6>
+                        </div>
+                    </a>";
+            return false;
+            exit(); //NÃO DEIXA CONTINUAR A EXECUÇÃO
+        }
+    }
+
+    public function deletarAluno($id){
+        $db = new Conexao();
+        $db = $db->conectar();
+
+        try {
+            $db->beginTransaction();
+
+            $sql = "DELETE FROM alunos 
+            WHERE id = :id";
+
+            $busca = $db->prepare($sql);
+            $busca->bindValue(":id", $id, PDO::PARAM_INT);
+            $busca->execute();
+
+            $db->commit();
+            $busca->closeCursor();
+
+            return true;
+        } catch (PDOException $e) {
 
             $db->rollBack();
             echo "<a  href='./index.php'> 

@@ -17,6 +17,10 @@
     background: linear-gradient(to right, #16151b, #1d1c27, #222231)
 }
 
+.margemBaixo{
+    margin-bottom: 150px;
+}
+
 .link_color{
     color: var(--primary_text_color);
     font-family: "Popins_Regular";
@@ -134,6 +138,12 @@
 
 .card_aula{
     background-color: #3d4651;
+}
+
+.footer{
+    padding: 100px 0px 100px 0px;
+    background-color: #22224a;
+    color: var(--primary_text_color);
 }
 
 @media (max-width: 768px) {
