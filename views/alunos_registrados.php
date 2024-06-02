@@ -15,7 +15,7 @@ require_once "../menu.php";
 
     <section class="cor_fundo_primeira_secao py-5">
         <div class="container">
-            <h1 class="text_color text-center">ALUNOS REGISTRADOS NA ESCOLA</h1>
+            <h1 class="text_color text-center">ALUNOS REGISTRADOS NO NOSSO ESTÚDIO</h1>
             <table class="table table-dark table-striped my-5 text-center">
                 <thead>
                     <tr class="">
@@ -32,8 +32,8 @@ require_once "../menu.php";
                         <td class="pt-3 text_color w-25"><?= $item->nome ?></td>
                         <td class="pt-3 text_color w-25"><?= $item->idade ?></td>
                         <td class="pt-3 text_color w-25"><?= $item->total ?></td>
-                        <td><button class="btn btn-primary">Editar</button></td>
-                        <td><button class="btn btn-danger">Excluir</button></td>
+                        <td><button class="btn btn-primary"><i class="text-white bi bi-pencil-fill"></i></button></td>
+                        <td><button class="btn btn-danger"><i class="text-white bi bi-trash3-fill"></i></button></td>
                     </tr>
                     <?php }?>
                 </tbody>

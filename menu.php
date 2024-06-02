@@ -33,17 +33,23 @@ $current_page = basename($_SERVER['PHP_SELF']);
                     <li class="nav-item">
                         <a class="nav-link link_color mx-3" href="./alunos_registrados.php">ALUNOS REGISTRADOS</a>
                     </li>
-                    <?php 
-                    $hidden = "d-block";
-
-                    if($current_page != 'index.php'){
-                        $hidden = 'd-none';
-                    }
-                    
-                    ?>
-                    <li class="<?= $hidden ?> nav-item">
-                        <a class="nav-link link_color mx-3" href="#aulas" aria-disabled="true">AULAS</a>
-                    </li>
+                    <?php if ($current_page == 'index.php') { ?>
+                        <li class="<?= $hidden ?> nav-item">
+                            <a class="nav-link link_color mx-3" href="#aulas" aria-disabled="true">AULAS</a>
+                        </li>
+                    <?php } else if ($current_page != 'index.php') { ?>
+                        <li class="<?= $hidden ?> nav-item dropdown">
+                            <a class="nav-link link_color dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                AULAS
+                            </a>
+                            <ul id="dropAula" class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item link_color" href="./aula.php?aula=1">DANÇA DE RUA</a></li>
+                                <li><a class="dropdown-item link_color" href="./aula.php?aula=2">BALLET</a></li>
+                                <li><a class="dropdown-item link_color" href="./aula.php?aula=3">DANÇA DE SALÃO</a></li>
+                                <li><a class="dropdown-item link_color" href="./aula.php?aula=4">DANÇA CONTEMPORÂNEA</a></li>
+                            </ul>
+                        </li>
+                    <?php } ?>
                 </ul>
             </div>
         </div>

@@ -66,13 +66,11 @@ include_once "../menu.php"
                                 <img class="w-75" src="../assets/images/img<?= $i; ?>.png" alt="">
                             </div>
 
-                            <div class="d-flex text-center justify-content-around flex-column w-75">
+                            <div class="d-flex text-center justify-content-evenly flex-column w-75">
                                 <h2 class="text_color"><?= $aulas->danca ?></h2>
+                                <h4 class="text_color">Horário de Aula: <?= substr($aulas->horario, 0, 5) ?></h4>
                                 <div class="justify-content-center">
-                                    <form action="./aula.php" method="post">
-                                        <input hidden name="id" type="text" value="<?= $aulas->id ?>">
-                                        <button name="enviar" class="btn btn-dark text_color w-50">VER AULA</button>
-                                    </form>
+                                    <a href="./aula.php?aula=<?= $aulas->id ?>"><button name="enviar" class="btn btn-dark text_color w-50">VER AULA</button></a>
                                 </div>
                             </div>
 

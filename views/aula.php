@@ -3,12 +3,31 @@
 include "../controller/dancaController.php";
 include_once "../menu.php";
 
-$id_aula = $_POST['id'];
+$id_aula = $_GET['aula'];
 
 $dancaController = new DancaController();
 $aula = $dancaController->getAula($id_aula);
 
-$registrosAula = $dancaController->getRegistroAula($id_aula);
+$registrosAula = $dancaController->getRegistroAula($id_aula, "", "");
+
+if (isset($_POST['action'])) {
+    $acao = $_POST['action'];
+
+    if ($acao == "update") {
+        $nivel = $_POST['nivel'];
+        $id_aluno = $_POST['id_aluno'];
+        var_dump($nivel, $id_aluno);
+        $atualizarNivel = $dancaController->atualizarNivel($nivel, $id_aluno, $id_aula);
+        header("Location: ./aula.php?aula=$id_aula");
+        exit;
+        
+    } else if ($acao == "delete") {
+        $id_aluno = $_POST['id_aluno'];
+        $deletarAlunoAula = $dancaController->deletarAlunoAula($id_aluno, $id_aula);
+        header("Location: ./aula.php?aula=$id_aula");
+        exit;
+    }
+}
 
 ?>
 
@@ -24,8 +43,8 @@ $registrosAula = $dancaController->getRegistroAula($id_aula);
                 <h3 class="text_color my-2">Professor: <?= $aula->professor ?></h3>
                 <h3 class="text_color my-3">Especialista em: <?= $aula->especialidade ?></h3>
                 <div class="mt-4 d-flex justify-content-md-center">
-                    <?php for($i = 1; $i < 6; $i++ ){ ?>
-                    <h4><i class="estrela bi bi-star-fill"></i></h4>
+                    <?php for ($i = 1; $i < 6; $i++) { ?>
+                        <h4><i class="estrela bi bi-star-fill"></i></h4>
                     <?php } ?>
                 </div>
             </div>
@@ -39,26 +58,53 @@ $registrosAula = $dancaController->getRegistroAula($id_aula);
                     <tr class="">
                         <th class="w-25" scope="col">Aluno</th>
                         <th class="w-25" scope="col">Idade</th>
-                        <th class="w-25" scope="col">Quantidade de Cursos Matriculados</th>
-                        <th class="w-25" scope="col">Editar</th>
+                        <th class="w-25" scope="col">Experiência</th>
                         <th scope="col">Excluir</th>
                     </tr>
                 </thead>
                 <tbody class="">
-                    <?php foreach ($alunos as $alunos => $item) { ?>
+                    <?php foreach ($registrosAula as $registro => $item) { ?>
                         <tr>
-                            <td class="w-25"><?= $item->nome ?></td>
-                            <td class="w-25"><?= $item->idade ?></td>
-                            <td class="w-25"><?= $item->total ?></td>
-                            <td><button class="btn btn-primary">Editar</button></td>
-                            <td><button class="btn btn-danger">Excluir</button></td>
+                            <form method="post">
+                                <td hidden><input type="hidden" name="action" value=""></td>
+                                <td hidden><input type="hidden" name="id_aluno" value="<?= $item->id_aluno ?>"></td>
+                                <td class="w-25 pt-4"><?= $item->nome ?></td>
+                                <td class="w-25 pt-4"><?= $item->idade ?></td>
+                                <td class="w-25"><select onchange="this.form.action.value='update'; this.form.submit()" class="text-center form-select form_nivel rounded my-2 py-2" name="nivel" aria-label="Default select example" required>
+                                        <?php
+
+                                        $iniciante = "";
+                                        $inter = "";
+                                        $avanc = "";
+
+                                        switch ($item->nivel) {
+                                            case "Iniciante":
+                                                $iniciante = "selected";
+                                                break;
+                                            case "Intermediário":
+                                                $inter = "selected";
+                                                break;
+                                            case "Avançado":
+                                                $avanc = "selected";
+                                                break;
+                                        }
+
+                                        ?>
+                                        <option <?= $iniciante ?> value="Iniciante">Iniciante</option>
+                                        <option <?= $inter ?> value="Intermediário">Intermediário</option>
+                                        <option <?= $avanc ?> value="Avançado">Avançado</option>
+                                    </select></td>
+                                <td class="pt-3"><button name="deletar" onclick="this.form.action.value='delete'; this.form.submit()" class="btn btn-danger">
+                                        <i class="text-white bi bi-trash3-fill"></i>
+                                    </button></td>
+                            </form>
                         </tr>
                     <?php } ?>
                 </tbody>
             </table>
 
             <div class="text-center">
-                <a href="./registrar_aluno.php"><button class="text_color btn_salvar btn">CADASTRAR UM NOVO ALUNO</button></a>
+                <a href="./registrar_aluno_aula.php?aula=<?= $id_aula ?>"><button class="text_color btn_salvar btn">CADASTRAR UM NOVO ALUNO NA AULA</button></a>
             </div>
         </div>
     </section>
