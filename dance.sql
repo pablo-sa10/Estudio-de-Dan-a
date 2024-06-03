@@ -31,7 +31,7 @@ CREATE TABLE `alunos` (
   `id` int NOT NULL,
   `nome` varchar(100) NOT NULL,
   `idade` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 
 --
 -- Despejando dados para a tabela `alunos`
@@ -53,7 +53,7 @@ CREATE TABLE `aulas` (
   `danca` varchar(100) NOT NULL,
   `horario` time NOT NULL,
   `professor_id` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 
 --
 -- Despejando dados para a tabela `aulas`
@@ -76,7 +76,7 @@ CREATE TABLE `participacoes` (
   `aluno_id` int DEFAULT NULL,
   `aula_id` int DEFAULT NULL,
   `nivel_experiencia_aluno` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 
 --
 -- Despejando dados para a tabela `participacoes`
@@ -102,7 +102,7 @@ CREATE TABLE `professores` (
   `id` int NOT NULL,
   `nome` varchar(100) NOT NULL,
   `especialidade` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 
 --
 -- Despejando dados para a tabela `professores`
